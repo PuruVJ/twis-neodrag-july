@@ -85,6 +85,12 @@ HI everyone, I am Puru, I come from Jaipur, Rajasthan, which is in the desert of
 
 </v-click>
 
+<!--
+I would like to introduce you to Neodrag. It's a tiny draggable library, that is highly reactive, and has adapters for svelte, vue, react, solid-js and vanilla. It is quite small, at around 1.7KB min+br for the svelte version, and has a lean core with minimal adapters.
+
+[click] However, it has some shortcomings. It is not extensible, meaning you cannot add your own plugins or customize the behavior beyond the options provided. It also does not have fine-grained control, meaning any option change causes unnecessary object creation and garbage collection. And finally, it attaches 3 event listeners to each draggable element, which can be a performance issue if you have a lot of draggables on the page.
+-->
+
 ---
 
 ## Neodrag v2
@@ -306,6 +312,49 @@ layout: two-cols
 
 <!--
 As you can see, the options are gone! They're now replaced with an array in which you pass certain functions. These functions are a new concept in Neodrag, and they're called plugins. These plugins are small, composable functions that can be used to extend the functionality of the draggable ayyacj,emt. They can be used to add new features, customize behavior, or even replace existing functionality.
+-->
+
+---
+
+## BoundsFrom
+
+````md magic-move
+```ts
+export type DragBounds =
+	| HTMLElement
+	| Partial<DragBoundsCoords>
+	| 'parent'
+	| 'body'
+	| (string & Record<never, never>);
+```
+
+```ts
+type BoundFromFunction = (data: {
+	root_node: HTMLElement | SVGElement;
+}) => [[x1: number, y1: number], [x2: number, y2: number]];
+
+const BoundsFrom: {
+  element(element: HTMLElement, padding?: Padding): BoundFromFunction;
+  selector(selector: string, padding?: Padding, root?: HTMLElement): BoundFromFunction;
+  viewport(padding?: Padding): BoundFromFunction;
+  parent(padding?: Padding): BoundFromFunction;
+};
+```
+````
+
+<template v-if="$clicks > 0">
+
+```ts
+bounds(BoundsFrom.parent())
+bounds(BoundsFrom.element(document.querySelector('.container')))
+bounds(BoundsFrom.selector('.container', { top: 10, left: 10 }))
+bounds(BoundsFrom.viewport({ top: 10, left: 10 }))
+```
+
+</template>
+
+<!--
+[click] Oh and remember the bounds options I showed you before with the convoluted typing? It becomes muchh simpler! Now there's a BoundsFrom object that has methods to get the bounds from an element, a selector, the viewport or the parent. And you can even provide padding to these methods. This is much more flexible and easier to use than before. Heck, infact you don't even have to use BoundsFrom, you can just pass a function which return an array of initial and final coordinates of bounds. Super simple
 -->
 
 ---

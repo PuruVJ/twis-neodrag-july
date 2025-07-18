@@ -1,0 +1,24 @@
+{
+	"name": "react-india-2024",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"build": "slidev build",
+		"dev": "slidev",
+		"export": "slidev export"
+	},
+	"dependencies": {
+		"@neoconfetti/vue": "^2.2.1",
+		"@neodrag/core": "https://pkg.pr.new/@neodrag/core@fc0fb98",
+		"@neodrag/vue": "https://pkg.pr.new/@neodrag/vue@fc0fb98",
+		"@slidev/cli": "^52.0.0",
+		"@slidev/theme-default": "latest",
+		"@slidev/theme-seriph": "latest",
+		"vue": "^3.4.38"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "6.1.0",
+		"svelte": "5.36.2",
+		"vite-plugin-virtual": "^0.4.0"
+	}
+}
